@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Карьера будущего — SberStudent</title>
+  <meta name="description" content="Карьера будущего 2.0 — попробуй себя в профессиях будущего. Выбери карьерный трек и двигайся в своём темпе.">
+  <link rel="preload" href="assets/fonts/SBSansDisplay-SemiBold.ttf" as="font" type="font/ttf" crossorigin>
+  <link id="main-css" rel="stylesheet" href="css/styles.css">
+  <!-- DEV: всегда подтягивать свежий CSS (обход кеша сервера во время разработки) -->
+  <script>document.getElementById('main-css').href = 'css/styles.css?t=' + Date.now();</script>
+</head>
+<body>
+
+  <main>
+
+    <!-- ============================================================
+         ЭКРАН 1 — HERO «Карьера будущего»
+         ============================================================ -->
+    <section class="hero" aria-label="Карьера будущего">
+
+      <!-- Фон-градиент: полноширинный слой, заполняет всё пространство -->
+      <img class="hero__bg" src="assets/img/hero-bg.jpg" alt="" aria-hidden="true">
+
+      <!-- Контентный слой: фиксированные 1440px по центру, не масштабируется -->
+      <div class="hero__stage">
+
+        <!-- 3D-композиция (выгружена из Figma, прозрачный PNG) -->
+        <img class="hero__3d" src="assets/img/hero-3d.png?v=2" alt="" aria-hidden="true">
+
+        <!-- Меню -->
+        <nav class="menu" aria-label="Основная навигация">
+          <a class="menu__logo" href="#" aria-label="Карьера будущего">
+            <img src="assets/img/logo-menu.svg" alt="Карьера будущего" width="122" height="50">
+          </a>
+          <ul class="menu__nav">
+            <li><a href="#">Стажировки</a></li>
+            <li><a href="#">Обучение</a></li>
+            <li><a href="#">МАЯКИ</a></li>
+            <li><a href="#">Амбассадоры в вузах</a></li>
+            <li><a href="#">Стипендии и гранты</a></li>
+            <li><a href="#">Экскурсии</a></li>
+            <li><a href="#">Мероприятия</a></li>
+          </ul>
+        </nav>
+
+        <!-- Заголовок. Бейдж «2.0» заезжает на «о» в «будущего» и уходит под 3D -->
+        <h1 class="hero__title">
+          <span>Карьера</span>
+          <span class="hero__title-l2">будущего<span class="hero__badge"><span class="hero__badge-t">2.0</span></span></span>
+        </h1>
+
+        <!-- Подзаголовок -->
+        <p class="hero__subtitle">
+          Совместная образовательная программа<br>
+          от Сбера и СберУниверситета
+        </p>
+
+        <!-- CTA -->
+        <a class="hero__cta" href="#tracks"><span>Выбрать трек</span></a>
+
+        <!-- Стеклянные плашки со статистикой -->
+        <div class="glass-stat glass-stat--courses">
+          <span class="glass-stat__num">280+</span>
+          <span class="glass-stat__label">часов курсов<br>и интервью</span>
+        </div>
+
+        <div class="glass-stat glass-stat--tracks">
+          <span class="glass-stat__num">5</span>
+          <span class="glass-stat__label">карьерных<br>треков</span>
+        </div>
+
+        <div class="glass-stat glass-stat--leaders">
+          <span class="glass-stat__num">25+</span>
+          <span class="glass-stat__label">лидеров<br>экосистемы Сбера</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ЭКРАН 2 — «От выбора трека до сертификата» (3 шага)
+         Карточки целиком — изображения (default + hover), кроссфейд.
+         ============================================================ -->
+    <section class="steps">
+      <div class="section">
+        <h2 class="steps__title">От выбора трека до сертификата</h2>
+
+        <div class="steps__grid">
+
+          <article class="step-card"
+            aria-label="Шаг 1. Выбираешь свой трек. Пять треков под разные интересы. Берёшь один — тот, что близок. Остальные доступны параллельно, если захочешь.">
+            <img class="step-card__img" src="assets/img/steps/step1-default.png" alt="">
+            <img class="step-card__img step-card__hover" src="assets/img/steps/step1-hover.png" alt="" aria-hidden="true">
+          </article>
+
+          <article class="step-card"
+            aria-label="Шаг 2. Проходишь курсы и интервью. Электронные курсы СберУниверситета плюс живые разговоры с лидерами экосистемы Сбера и прикладной кейс. Бесплатно, в своём темпе, 24/7.">
+            <img class="step-card__img" src="assets/img/steps/step2-default.png" alt="">
+            <img class="step-card__img step-card__hover" src="assets/img/steps/step2-hover.png" alt="" aria-hidden="true">
+          </article>
+
+          <article class="step-card"
+            aria-label="Шаг 3. Получаешь сертификат. После прохождения всех материалов трека ты получаешь именной электронный сертификат от СберУниверситета.">
+            <img class="step-card__img" src="assets/img/steps/step3-default.png" alt="">
+            <img class="step-card__img step-card__hover" src="assets/img/steps/step3-hover.png" alt="" aria-hidden="true">
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ЭКРАН 3 — «Пять профессиональных треков» (бенто из 5 карточек)
+         ============================================================ -->
+    <section class="tracks" id="tracks">
+      <img class="tracks__3d" src="assets/img/tracks/3d-object.png" alt="" aria-hidden="true">
+      <div class="section">
+        <h2 class="tracks__title">Пять профессиональных треков</h2>
+
+        <div class="tracks__grid">
+
+          <!-- Верхний ряд: 2 широкие -->
+          <div class="tracks__row">
+
+            <article class="track-card track-card--wide">
+              <div class="track-card__head">
+                <h3 class="track-card__title">Анализ данных и ИИ</h3>
+                <span class="track-card__badge">60 ч</span>
+              </div>
+              <p class="track-card__desc">ИИ — не хайп, а твой будущий соавтор. Введение в большие данные, рекомендательные системы, ИИ-агенты и профессии будущего</p>
+              <div class="track-card__tags">
+                <span class="track-card__tag" style="background:#9df19d">Big Data</span>
+                <span class="track-card__tag" style="background:#9df19d">ML</span>
+                <span class="track-card__tag" style="background:#9df19d">ИИ-агенты</span>
+              </div>
+              <button class="track-card__btn" data-modal="ai"><span>Подробнее</span></button>
+            </article>
+
+            <article class="track-card track-card--wide">
+              <div class="track-card__head">
+                <h3 class="track-card__title">Маркетинг и дизайн</h3>
+                <span class="track-card__badge">55 ч</span>
+              </div>
+              <p class="track-card__desc">Почему один дизайн продаёт, а другой остаётся незамеченным. CJM, нейромаркетинг, UX и презентации</p>
+              <div class="track-card__tags">
+                <span class="track-card__tag" style="background:#ffbeb0">CJM</span>
+                <span class="track-card__tag" style="background:#ffbeb0">UX</span>
+                <span class="track-card__tag" style="background:#ffbeb0">Бренд</span>
+              </div>
+              <a class="track-card__btn" href="#"><span>Подробнее</span></a>
+            </article>
+
+          </div>
+
+          <!-- Нижний ряд: 3 узкие -->
+          <div class="tracks__row">
+
+            <article class="track-card">
+              <div class="track-card__head">
+                <h3 class="track-card__title">Финансы</h3>
+                <span class="track-card__badge">50 ч</span>
+              </div>
+              <p class="track-card__desc">Как работают деньги в цифровую эпоху. Личные финансы, unit-экономика, банковские продукты и разбор реальных финансовых задач</p>
+              <div class="track-card__tags">
+                <span class="track-card__tag" style="background:#ffc886">Личные финансы</span>
+                <span class="track-card__tag" style="background:#ffc886">Unit</span>
+                <span class="track-card__tag" style="background:#ffc886">Банкинг</span>
+              </div>
+              <a class="track-card__btn" href="#"><span>Подробнее</span></a>
+            </article>
+
+            <article class="track-card">
+              <div class="track-card__head">
+                <h3 class="track-card__title">ИТ-навыки</h3>
+                <span class="track-card__badge">68 ч</span>
+              </div>
+              <p class="track-card__desc">Python и алгоритмы, большие данные, генеративный ИИ и технические тексты. Фундамент для будущего инженера</p>
+              <div class="track-card__tags">
+                <span class="track-card__tag" style="background:#c4f1ff">Python</span>
+                <span class="track-card__tag" style="background:#c4f1ff">Big Data</span>
+                <span class="track-card__tag" style="background:#c4f1ff">GenAI</span>
+              </div>
+              <a class="track-card__btn" href="#"><span>Подробнее</span></a>
+            </article>
+
+            <article class="track-card">
+              <div class="track-card__head">
+                <h3 class="track-card__title">Разработка продукта</h3>
+                <span class="track-card__badge">50 ч</span>
+              </div>
+              <p class="track-card__desc">Полный цикл создания цифрового сервиса: гипотезы, UX-тестирование, банковские карты, эквайринг и основы DevOps</p>
+              <div class="track-card__tags">
+                <span class="track-card__tag" style="background:#fff386">Product</span>
+                <span class="track-card__tag" style="background:#fff386">UX</span>
+                <span class="track-card__tag" style="background:#fff386">DevOps</span>
+              </div>
+              <a class="track-card__btn" href="#"><span>Подробнее</span></a>
+            </article>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ЭКРАН 4 — «Обязательная база и трек по выбору»
+         ============================================================ -->
+    <section class="program">
+      <div class="section">
+        <h2 class="program__title">Обязательная база и трек по выбору</h2>
+        <p class="program__subtitle">
+          Программа состоит из двух частей. Общая база даёт контекст и мягкие навыки,<br>
+          а трек, который ты выбираешь сам — специализацию
+        </p>
+
+        <div class="program__row">
+
+          <!-- Карточка: Базовая часть -->
+          <article class="prog-card prog-card--base">
+            <div class="prog-card__bg">
+              <img class="prog-card__3d prog-card__3d--composition" src="assets/img/program/3d-composition-base.png" alt="" aria-hidden="true">
+            </div>
+            <div class="prog-card__content">
+              <div class="prog-card__info">
+                <div class="prog-card__about">
+                  <div class="prog-card__header">
+                    <span class="prog-card__label prog-card__label--orange">Обязательно для всех</span>
+                    <h3 class="prog-card__title">Базовая часть</h3>
+                  </div>
+                  <p class="prog-card__desc">Два общих модуля проходят все участники программы. Это контекст, на котором строится любой профессиональный трек</p>
+                </div>
+                <ul class="prog-card__modules">
+                  <li class="prog-card__module">
+                    <span class="prog-card__atom prog-card__atom--orange">01</span>
+                    <span class="prog-card__module-name">Вводный блок о компании</span>
+                  </li>
+                  <li class="prog-card__module">
+                    <span class="prog-card__atom prog-card__atom--orange">02</span>
+                    <span class="prog-card__module-name">Мягкие навыки</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="prog-card__stats">
+                <div class="prog-stat">
+                  <span class="prog-stat__num">2</span>
+                  <span class="prog-stat__label">обязательных<br>модуля</span>
+                </div>
+                <div class="prog-stat">
+                  <span class="prog-stat__num">≈28</span>
+                  <span class="prog-stat__label">часов<br>в сумме</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Карточка: Профессиональный трек -->
+          <article class="prog-card prog-card--track">
+            <div class="prog-card__bg">
+              <img class="prog-card__3d prog-card__3d--big" src="assets/img/program/3d-green-big.png" alt="" aria-hidden="true">
+              <img class="prog-card__3d prog-card__3d--small" src="assets/img/program/3d-green-small.png" alt="" aria-hidden="true">
+            </div>
+            <div class="prog-card__content">
+              <div class="prog-card__info">
+                <div class="prog-card__about prog-card__about--track">
+                  <div class="prog-card__header prog-card__header--track">
+                    <span class="prog-card__label prog-card__label--green">1 из 5 на выбор</span>
+                    <h3 class="prog-card__title">Профессиональный трек</h3>
+                  </div>
+                  <p class="prog-card__desc prog-card__desc--track">Углубление в выбранную тему: пять направлений со своим набором курсов, интервью и прикладных кейсов. Выбираешь одно — идёшь по нему до сертификата</p>
+                </div>
+                <ul class="prog-card__modules prog-card__modules--grid">
+                  <li class="prog-card__module">
+                    <span class="prog-card__atom prog-card__atom--green">01</span>
+                    <span class="prog-card__module-name">Погружение в направление</span>
+                  </li>
+                  <li class="prog-card__module">
+                    <span class="prog-card__atom prog-card__atom--green">04</span>
+                    <span class="prog-card__module-name">Разбор решений</span>
+                  </li>
+                  <li class="prog-card__module">
+                    <span class="prog-card__atom prog-card__atom--green">02</span>
+                    <span class="prog-card__module-name">Инструменты и подходы</span>
+                  </li>
+                  <li class="prog-card__module">
+                    <span class="prog-card__atom prog-card__atom--green">05</span>
+                    <span class="prog-card__module-name">Итоговое задание</span>
+                  </li>
+                  <li class="prog-card__module">
+                    <span class="prog-card__atom prog-card__atom--green">03</span>
+                    <span class="prog-card__module-name">Практика на кейсах</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="prog-card__stats">
+                <div class="prog-stat">
+                  <span class="prog-stat__num">1</span>
+                  <span class="prog-stat__label">трек<br>на выбор</span>
+                </div>
+                <div class="prog-stat">
+                  <span class="prog-stat__num">40-68</span>
+                  <span class="prog-stat__label">часов в зависимости<br>от трека</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ЭКРАН 5 — «Коротко о главном» (FAQ + инфо-карточки)
+         ============================================================ -->
+    <section class="faq">
+
+      <!-- 3D-сферы: декорации правый верхний угол -->
+      <img class="faq__sphere-small" src="assets/img/faq/sphere-small.png" alt="" aria-hidden="true">
+      <img class="faq__sphere-big"   src="assets/img/faq/sphere-big.png"   alt="" aria-hidden="true">
+
+      <div class="section">
+        <h2 class="faq__title">Коротко о главном</h2>
+
+        <div class="faq__layout">
+
+          <!-- Левая колонка: 2 инфо-карточки -->
+          <aside class="faq__sidebar">
+
+            <!-- Карточка: Email -->
+            <article class="faq-card faq-card--email">
+              <img class="faq-card__envelope" src="assets/img/faq/envelope.svg" alt="" aria-hidden="true">
+              <div class="faq-card__body">
+                <div class="faq-card__text">
+                  <h3 class="faq-card__title">Не нашёл вопрос?</h3>
+                  <p class="faq-card__desc">Если ответа нет в списке — напиши нам, мы ответим</p>
+                </div>
+                <a class="faq-card__btn" href="mailto:support@sber.ru"><span>support@sber.ru</span></a>
+              </div>
+            </article>
+
+            <!-- Карточка: Подписка -->
+            <article class="faq-card faq-card--subscribe">
+              <div class="faq-card__text">
+                <h3 class="faq-card__title">Будь в курсе событий</h3>
+                <p class="faq-card__channel">Подпишись на канал <strong>@sberstudent!</strong></p>
+                <p class="faq-card__desc">Здесь мы делимся карьерными и образовательными возможностями, лайфхаками по отбору на стажировки и, конечно, приглашаем на крутые тусовки</p>
+              </div>
+              <a class="faq-card__btn" href="#"><span>Подписаться</span></a>
+            </article>
+
+          </aside>
+
+          <!-- Правая колонка: FAQ аккордеон -->
+          <ul class="faq__list">
+
+            <li class="faq__item">
+              <button class="faq__question" aria-expanded="false">
+                <span>Это путь к работе в Сбере?</span>
+                <img class="faq__arrow" src="assets/img/faq/arrow.svg" alt="">
+              </button>
+              <div class="faq__answer">
+                <p>Нет. Программа не связана с трудоустройством и не даёт приоритет на стажировку. Её задача — расширить кругозор, дать прикладные навыки и показать, как устроена крупная цифровая компания изнутри.</p>
+              </div>
+            </li>
+
+            <li class="faq__item">
+              <button class="faq__question" aria-expanded="false">
+                <span>Сколько это стоит?</span>
+                <img class="faq__arrow" src="assets/img/faq/arrow.svg" alt="">
+              </button>
+              <div class="faq__answer">
+                <p>Программа полностью бесплатная. Регистрируешься, выбираешь трек и проходишь все материалы без какой-либо оплаты.</p>
+              </div>
+            </li>
+
+            <li class="faq__item">
+              <button class="faq__question" aria-expanded="false">
+                <span>Кто может участвовать?</span>
+                <img class="faq__arrow" src="assets/img/faq/arrow.svg" alt="">
+              </button>
+              <div class="faq__answer">
+                <p>Студенты и молодые специалисты, которым интересно разобраться в работе крупной цифровой компании. Нет ограничений по специальности или курсу.</p>
+              </div>
+            </li>
+
+            <li class="faq__item">
+              <button class="faq__question" aria-expanded="false">
+                <span>Сколько времени занимает один трек?</span>
+                <img class="faq__arrow" src="assets/img/faq/arrow.svg" alt="">
+              </button>
+              <div class="faq__answer">
+                <p>От 40 до 68 часов — в зависимости от выбранного трека. Ты проходишь в своём темпе, доступ открыт 24/7.</p>
+              </div>
+            </li>
+
+            <li class="faq__item">
+              <button class="faq__question" aria-expanded="false">
+                <span>Где проходит обучение?</span>
+                <img class="faq__arrow" src="assets/img/faq/arrow.svg" alt="">
+              </button>
+              <div class="faq__answer">
+                <p>Полностью онлайн — на платформе СберУниверситета. Видеолекции, интерактивные курсы и интервью с экспертами доступны из любой точки.</p>
+              </div>
+            </li>
+
+            <li class="faq__item">
+              <button class="faq__question" aria-expanded="false">
+                <span>Можно ли пройти несколько треков?</span>
+                <img class="faq__arrow" src="assets/img/faq/arrow.svg" alt="">
+              </button>
+              <div class="faq__answer">
+                <p>Да. После завершения одного трека можно записаться на следующий. Каждый трек — отдельный сертификат.</p>
+              </div>
+            </li>
+
+            <li class="faq__item">
+              <button class="faq__question" aria-expanded="false">
+                <span>Что будет указано в сертификате?</span>
+                <img class="faq__arrow" src="assets/img/faq/arrow.svg" alt="">
+              </button>
+              <div class="faq__answer">
+                <p>Твоё имя, название трека и дата завершения. Сертификат именной, выдаётся от СберУниверситета в электронном формате.</p>
+              </div>
+            </li>
+
+          </ul>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ЭКРАН 6 — CTA «Пять треков ждут, выбирай свой»
+         ============================================================ -->
+    <section class="cta">
+      <img class="cta__3d" src="assets/img/cta/3d-composition.png" alt="" aria-hidden="true">
+      <div class="section">
+        <div class="cta__content">
+          <h2 class="cta__title">Пять треков ждут,<br>выбирай свой</h2>
+          <p class="cta__desc">Регистрация на платформе СберУниверситета занимает пару минут. Доступ к курсам — сразу после подтверждения почты</p>
+          <a class="cta__btn" href="#tracks"><span>Выбрать трек</span></a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       ПОПАП: Анализ данных и ИИ
+       ============================================================ -->
+  <div class="modal-overlay" id="modal-ai" role="dialog" aria-modal="true" aria-labelledby="modal-ai-title" aria-hidden="true">
+    <div class="modal" tabindex="-1">
+
+      <button class="modal__close" aria-label="Закрыть"></button>
+
+      <div class="modal__scroll">
+
+      <!-- Шапка -->
+      <div class="modal__head">
+        <div class="modal__title-row">
+          <h2 class="modal__title" id="modal-ai-title">Анализ данных и ИИ</h2>
+          <span class="modal__hours">60 ч</span>
+        </div>
+        <div class="modal__tags">
+          <span class="modal__tag">Big Data</span>
+          <span class="modal__tag">ML</span>
+          <span class="modal__tag">ИИ-агенты</span>
+        </div>
+        <p class="modal__desc">ИИ — не хайп, а инструмент, который меняет профессии прямо сейчас. Введение в большие данные, рекомендательные системы, ИИ-агенты и новые роли, которые появляются вокруг них.</p>
+        <a class="modal__cta" href="#"><span>Записаться на трек</span></a>
+      </div>
+
+      <!-- Тело: две колонки -->
+      <div class="modal__body">
+
+        <!-- Левая колонка -->
+        <div class="modal__col modal__col--left">
+
+          <div class="modal__section">
+            <h3 class="modal__section-title">Для кого этот трек</h3>
+            <ul class="modal__for-list">
+              <li>Хочешь разобраться в ИИ и данных не как пользователь, а как будущий специалист</li>
+              <li>Тебе интересны рекомендательные системы, голосовые помощники и алгоритмы</li>
+              <li>Думаешь об аналитике, data science, маркетинге или продукте</li>
+              <li>Хочешь прокачать логику, критическое мышление и работу с информацией</li>
+            </ul>
+          </div>
+
+          <div class="modal__skills">
+            <h3 class="modal__skills-title">Что ты сможешь после<br>прохождения трека?</h3>
+            <ul class="modal__skills-list">
+              <li>Понимать природу ИИ — чем он отличается от обычных программ</li>
+              <li>Ориентироваться в больших данных: что такое Big Data, как их собирают и хранят</li>
+              <li>Объяснять, как ИИ применяется в реальной жизни — от банков до медицины</li>
+              <li>Использовать ИИ-агентов и знать, какие профессии появляются рядом с ними</li>
+              <li>Получить электронный сертификат СберУниверситета по окончании трека</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- Правая колонка -->
+        <div class="modal__col modal__col--right">
+
+          <div class="modal__section">
+            <h3 class="modal__section-title">Состав трека</h3>
+            <ol class="modal__modules">
+              <li>
+                <span class="modal__mod-name">Введение в данные и искусственный интеллект</span>
+                <span class="modal__mod-hours">6 ч</span>
+              </li>
+              <li>
+                <span class="modal__mod-name">Большие данные: фундаментальный курс</span>
+                <span class="modal__mod-hours">14 ч</span>
+              </li>
+              <li>
+                <span class="modal__mod-name">Как работают рекомендательные системы</span>
+                <span class="modal__mod-hours">8 ч</span>
+              </li>
+              <li>
+                <span class="modal__mod-name">ИИ-агенты и профессии будущего</span>
+                <span class="modal__mod-hours">8 ч</span>
+              </li>
+              <li>
+                <span class="modal__mod-name">ИИ в реальной жизни: банки, медицина, транспорт</span>
+                <span class="modal__mod-hours">5 ч</span>
+              </li>
+              <li>
+                <span class="modal__mod-name">Интервью: AI-стек Сбера и опыт команды GigaChat</span>
+                <span class="modal__mod-hours">4 ч</span>
+              </li>
+              <li>
+                <span class="modal__mod-name">Интервью: как Сбер строит data-продукты</span>
+                <span class="modal__mod-hours">4 ч</span>
+              </li>
+              <li>
+                <span class="modal__mod-name">Практический кейс</span>
+                <span class="modal__mod-hours">8 ч</span>
+              </li>
+            </ol>
+          </div>
+
+          <div class="modal__section">
+            <h3 class="modal__section-title">Лидеры на интервью</h3>
+            <div class="modal__liders">
+              <div class="modal__lider">
+                <div class="modal__lider-avatar"></div>
+                <div class="modal__lider-info">
+                  <strong>Иван Иванов</strong>
+                  <span>Эксперт СберУниверситета</span>
+                </div>
+              </div>
+              <div class="modal__lider">
+                <div class="modal__lider-avatar"></div>
+                <div class="modal__lider-info">
+                  <strong>Иван Иванов</strong>
+                  <span>Эксперт СберУниверситета</span>
+                </div>
+              </div>
+              <div class="modal__lider">
+                <div class="modal__lider-avatar"></div>
+                <div class="modal__lider-info">
+                  <strong>Иван Иванов</strong>
+                  <span>Эксперт СберУниверситета</span>
+                </div>
+              </div>
+              <div class="modal__lider">
+                <div class="modal__lider-avatar"></div>
+                <div class="modal__lider-info">
+                  <strong>Иван Иванов</strong>
+                  <span>Эксперт СберУниверситета</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      </div><!-- /.modal__scroll -->
+    </div><!-- /.modal -->
+  </div><!-- /.modal-overlay -->
+
+  <!-- DEV: cache-bust JS так же как CSS -->
+  <script>
+    var ms = document.createElement('script');
+    ms.src = 'js/main.js?t=' + Date.now();
+    ms.defer = true;
+    document.head.appendChild(ms);
+  </script>
+</body>
+</html>

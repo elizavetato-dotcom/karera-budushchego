@@ -1,0 +1,1742 @@
+@import url('fonts.css');
+
+/* ============================================================
+   КАРЬЕРА БУДУЩЕГО — SberStudent
+   Токены синхронизированы с UI-китом «Клод_цифровая школа»
+   (Figma: ephnL5uzFLoLwYJ166Zz0g). Кит дорабатывается —
+   значения обновлять по мере изменений.
+   ============================================================ */
+
+:root {
+  /* ---------- ОСНОВНАЯ ПАЛИТРА ---------- */
+  --sber-green:   #21A038;  /* фирменный зелёный Сбера */
+  --mint:         #5CFF8D;
+  --light-green:  #56FF71;
+  --coral:        #FFBEB0;
+  --light-coral:  #FFE3DD;
+  --peach:        #FFC886;
+  --light-peach:  #FFE9CF;
+  --yellow:       #FFF386;
+  --light-yellow: #FFFACF;
+  --white:        #FFFFFF;
+  --grafite:      #283438;  /* текст / тёмные акценты (НЕ для фона) */
+
+  /* ---------- ДОПОЛНИТЕЛЬНЫЕ ЦВЕТА ---------- */
+  --grass-5:    #68EA68;
+  --grass-6:    #9DF19D;
+  --grass-7:    #B6F2B6;
+  --spring-5:   #B2EB38;
+  --spring-6:   #C7F05F;
+  --emerald:    #6CD89F;
+  --orange-6:   #FEB16A;
+  --grey:       #869093;
+  --light-grey: #D7D0DF;
+
+  /* ---------- ПРОЗРАЧНОСТИ ---------- */
+  --sber-green-20: rgba(33, 160, 56, 0.20);
+  --sber-green-50: rgba(33, 160, 56, 0.50);
+  --grass-6-50:    rgba(157, 241, 157, 0.50);
+  --white-70:      rgba(255, 255, 255, 0.70);
+  --white-50:      rgba(255, 255, 255, 0.50);
+
+  /* ---------- ГРАДИЕНТНЫЕ ТОКЕНЫ ---------- */
+  /* (фон главного экрана — отдельно, задаётся вручную) */
+  --grad-button-hover:   linear-gradient(90deg, var(--sber-green) 0%, var(--spring-5) 100%);
+  --grad-card-active:     linear-gradient(135deg, var(--grass-5) 0%, var(--yellow) 100%);
+  --grad-card-inactive:   linear-gradient(135deg, var(--grey) 0%, var(--light-grey) 100%);
+  --grad-1: linear-gradient(135deg, var(--light-yellow) 0%, var(--grass-6) 100%);
+  --grad-2: linear-gradient(135deg, var(--grass-5) 0%, var(--yellow) 50%, var(--peach) 100%);
+  --grad-3: linear-gradient(135deg, var(--peach) 0%, var(--yellow) 50%, var(--light-yellow) 100%);
+  --grad-6: linear-gradient(135deg, var(--orange-6) 0%, var(--yellow) 50%, var(--light-yellow) 100%);
+  --grad-7: linear-gradient(135deg, var(--light-yellow) 0%, var(--grass-6) 100%);
+  --grad-8: linear-gradient(135deg, var(--grass-5) 0%, var(--yellow) 50%, var(--peach) 100%);
+
+  /* ---------- ТЕКСТ ---------- */
+  --text-dark:  var(--grafite);   /* на светлом фоне */
+  --text-light: var(--white);     /* на тёмном/зелёном фоне */
+
+  /* ---------- ШРИФТЫ ---------- */
+  --font: 'SB Sans Display', 'Inter', 'Arial', sans-serif;
+
+  /* ---------- СПЕЙСИНГИ (десктоп 1440) ---------- */
+  --space-block:       160px;  /* между блоками */
+  --space-hero-sub:    40px;   /* заголовок главного экрана → подзаголовок (30–40) */
+  --space-block-sub:   25px;   /* заголовок блока → подзаголовок */
+  --space-sub-content: 60px;   /* подзаголовок → контент / плашки → кнопка */
+  --space-component:   40px;   /* между составляющими инфо-блока */
+  --space-card:        20px;   /* карточки внутри блока / дропдауны верт. */
+  --space-btn:         10px;   /* между кнопками городов / вузов */
+
+  /* ---------- МАКЕТ ---------- */
+  --container: 1440px;
+  --gutter: 80px;
+  --radius: 24px;
+  --radius-pill: 999px;
+}
+
+/* Мобильные спейсинги (артборд 560) */
+@media (max-width: 768px) {
+  :root {
+    --space-hero-sub:    20px;
+    --space-block-sub:   20px;
+    --space-sub-content: 40px;
+    --gutter: 20px;
+  }
+}
+
+/* ============================================================
+   RESET
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+main { overflow: hidden; }
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--text-dark);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, p, figure { margin: 0; }
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+ul { margin: 0; padding: 0; list-style: none; }
+
+/* ============================================================
+   ТИПОГРАФИКА (классы из UI-кита)
+   Все начертания: SB Sans Display. lh/ls — как в ките.
+   ============================================================ */
+
+/* --- Десктоп (1440) --- */
+.t-hero-1        { font-weight: 600; font-size: 168px; line-height: 1;   letter-spacing: -3px; }
+.t-hero-2        { font-weight: 600; font-size: 144px; line-height: 1;   letter-spacing: -3px; }
+.t-accent-big    { font-weight: 600; font-size: 120px; line-height: 1;   letter-spacing: -3px; }
+.t-h2-reg        { font-weight: 400; font-size: 120px; line-height: 1;   letter-spacing: -3px; }
+.t-h3            { font-weight: 600; font-size: 72px;  line-height: 1;   letter-spacing: 0; }
+.t-h4            { font-weight: 600; font-size: 40px;  line-height: 1;   letter-spacing: 0; }
+.t-h5            { font-weight: 600; font-size: 32px;  line-height: 1;   letter-spacing: 0; }
+.t-h6            { font-weight: 600; font-size: 24px;  line-height: 1.1; letter-spacing: 0; }
+.t-text-1        { font-weight: 400; font-size: 32px;  line-height: 1.1; letter-spacing: 0; }
+.t-text-2        { font-weight: 400; font-size: 24px;  line-height: 1.1; letter-spacing: 0; }
+.t-text-3-sb     { font-weight: 600; font-size: 20px;  line-height: 1;   letter-spacing: 0; }
+.t-text-3-reg    { font-weight: 400; font-size: 20px;  line-height: 1.1; letter-spacing: 0; }
+.t-text-4        { font-weight: 600; font-size: 18px;  line-height: 1;   letter-spacing: 0; }
+.t-little-fig    { font-weight: 600; font-size: 16px;  line-height: 1;   letter-spacing: 0; }
+.t-text-5        { font-weight: 400; font-size: 16px;  line-height: 1.2; letter-spacing: 0; }
+
+/* --- Мобайл (560): переопределяем размеры для тех же ролей --- */
+@media (max-width: 768px) {
+  .t-hero-1,
+  .t-hero-2      { font-size: 56px; letter-spacing: -2px; }   /* Mobile Header 2 */
+  .t-accent-big  { font-size: 104px; }                         /* Mobil accent number */
+  .t-h2-reg      { font-size: 56px; line-height: 1; letter-spacing: -2px; font-weight: 400; }
+  .t-h3          { font-size: 48px; }                          /* Mobil Header 3 */
+  .t-h4          { font-size: 40px; }
+  .t-h5          { font-size: 32px; }
+  .t-h6          { font-size: 24px; line-height: 1.1; }
+  .t-text-1      { font-size: 28px; line-height: 1.1; }        /* Mobil Text 1 */
+  .t-text-2      { font-size: 24px; line-height: 1.2; }
+  .t-text-3-sb   { font-size: 20px; }
+  .t-text-3-reg  { font-size: 20px; line-height: 1.2; }
+  .t-text-4      { font-size: 18px; }
+  .t-text-5      { font-size: 16px; line-height: 1.2; }
+}
+
+/* Подписи (только мобайл-кит, используем по необходимости) */
+.t-caption-1 { font-weight: 400; font-size: 14px; line-height: 1.1; letter-spacing: 0; }
+.t-caption-2 { font-weight: 400; font-size: 12px; line-height: 1.1; letter-spacing: 0; }
+
+/* ============================================================
+   УТИЛИТЫ
+   ============================================================ */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================================================
+   ЭКРАН 1 — HERO «Карьера будущего»
+   Дизайн: фрейм 1440. Элементы спозиционированы абсолютно
+   в координатах макета; .hero__stage масштабируется по ширине
+   вьюпорта (см. js/main.js).
+   ============================================================ */
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 970px;
+  overflow: hidden;
+  background: var(--white);
+}
+
+/* Фон тянется на всю ширину секции и заполняет пространство без искажений */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Плавный переход к следующей секции: тёплый низ фона мягко уходит в белый.
+   Полноширинный градиент (низ строго белый по всей ширине — стыка не видно).
+   Над фоном, под контентом. */
+.hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 480px;
+  background: linear-gradient(to bottom,
+    rgba(255, 255, 255, 0)    0%,
+    rgba(255, 255, 255, 0.35) 35%,
+    rgba(255, 255, 255, 0.75) 65%,
+    #ffffff                   90%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Контент — фиксированный холст 1440px по центру, без масштабирования */
+.hero__stage {
+  position: relative;
+  width: 1440px;
+  height: 970px;
+  margin: 0 auto;
+  z-index: 1;
+}
+
+.hero__3d {
+  position: absolute;
+  top: 31px;
+  left: 634px;
+  width: 937px;
+  height: auto;
+  z-index: 4;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* --- Меню --- */
+.menu {
+  position: absolute;
+  top: 20px;
+  left: 70px;
+  width: 1300px;
+  height: 66px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 0 8px 0 8px;
+  border-radius: 20px;
+  background: var(--white-70);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: inset 1px 1px 0 0 var(--white);
+  z-index: 7;
+}
+
+.menu__logo {
+  flex: none;
+  display: flex;
+  align-items: center;
+}
+.menu__logo img { display: block; height: 50px; width: auto; }
+
+.menu__nav {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menu__nav a {
+  display: inline-flex;
+  align-items: center;
+  /* верхний паддинг больше нижнего — SB Sans сидит высоко, опускаем текст
+     к оптическому центру hover-плашки */
+  padding: 16px 16px 12px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--grafite);
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.menu__nav a:hover { background: var(--grass-6-50); }
+.menu__nav a:active { background: transparent; color: var(--sber-green); }
+
+/* --- Заголовок --- */
+.hero__title {
+  position: absolute;
+  top: 223px;
+  left: 55px;
+  z-index: 2;
+  margin: 0;
+  font-weight: 600;
+  font-size: 168px;
+  line-height: 0.9;
+  letter-spacing: -5.04px;
+  color: var(--grafite);
+  white-space: nowrap;
+}
+.hero__title > span { display: block; }
+.hero__title-l2 { position: relative; }
+
+/* Бейдж «2.0»: привязан к концу «будущего» — заезжает на «о»,
+   уходит вправо-вниз под 3D-композицию (3D имеет z выше заголовка).
+   Текст оптически центрирован (верхний паддинг чуть больше нижнего). */
+.hero__badge {
+  position: relative;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: -48px;           /* наезд на «о» (+30px вправо) */
+  transform: translateY(-76px); /* сидит на верхнем крае «о» (+15px вверх) */
+  padding: 14px 32px;
+  border-radius: 100px;
+  background: var(--sber-green);
+  color: var(--white);
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 1;
+  letter-spacing: 0;
+  vertical-align: baseline;
+}
+/* оптическая центровка «2.0» внутри пилюли (+5px по метрикам SB Sans) */
+.hero__badge-t {
+  display: inline-block;
+  transform: translateY(5px);
+}
+
+/* --- Подзаголовок --- */
+.hero__subtitle {
+  position: absolute;
+  top: 560px;
+  left: 70px;
+  z-index: 2;
+  width: max-content;
+  margin: 0;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.2;
+  color: var(--grafite);
+}
+
+/* --- CTA --- */
+.hero__cta {
+  position: absolute;
+  top: 697px;
+  left: 70px;
+  z-index: 6;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 310px;
+  border-radius: 20px;
+  background: var(--sber-green);
+  color: var(--white);
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 28px 40px;
+}
+/* hover: градиент sber-green → spring-5 (плавно поверх заливки) */
+.hero__cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(84.01deg, var(--sber-green) 29.93%, var(--spring-5) 99.75%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.hero__cta:hover::before { opacity: 1; }
+/* текст над градиентом + оптическая центровка (+3px) */
+.hero__cta span { position: relative; z-index: 1; transform: translateY(3px); }
+
+/* --- Стеклянные плашки статистики --- */
+.glass-stat {
+  position: absolute;
+  z-index: 5;
+  display: flex;
+  align-items: center;        /* цифра и подпись выровнены по центрам друг друга */
+  gap: 16px;
+  padding: 12px 20px;         /* затем группа центрируется по высоте плашки */
+  border-radius: 20px;
+  background: var(--white-50);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: inset 1px 1px 0 0 var(--white);
+}
+.glass-stat__num {
+  font-weight: 600;
+  font-size: 64px;
+  line-height: 1;
+  letter-spacing: -1.28px;
+  color: var(--sber-green);
+  white-space: nowrap;
+  /* ink-центр цифры выше центра строки на 8px (метрики SB Sans) —
+     опускаем, чтобы краска цифры попала в центр плашки и совпала с подписью */
+  transform: translateY(8px);
+}
+.glass-stat__label {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.1;
+  color: var(--grafite);
+  white-space: nowrap;
+  transform: translateY(2px);
+}
+
+.glass-stat--courses { top: 133px; left: 1008px; }
+.glass-stat--tracks  { top: 405px; left: 1040px; }
+.glass-stat--leaders { top: 710px; left: 545px; }
+
+/* ============================================================
+   Контейнер секций (контент выровнен с hero: 1440, поля 70px)
+   ============================================================ */
+.section {
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: 70px;
+}
+
+/* ============================================================
+   ЭКРАН 2 — «От выбора трека до сертификата»
+   ============================================================ */
+.steps {
+  padding-top: 40px;
+  padding-bottom: 0;
+}
+
+.steps__title {
+  text-align: center;
+  font-weight: 600;
+  font-size: 72px;
+  line-height: 1;
+  letter-spacing: 0;
+  color: var(--grafite);
+  margin-bottom: 56px;
+}
+
+.steps__grid {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.step-card {
+  position: relative;
+  flex: none;
+  width: 420px;
+  height: 540px;
+  border-radius: 35px;
+  overflow: hidden;
+}
+
+.step-card__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+}
+
+/* hover-состояние карточки плавно проявляется поверх default */
+.step-card__hover {
+  opacity: 0;
+  transition: opacity 0.55s ease-in-out;
+  will-change: opacity;
+  backface-visibility: hidden;
+}
+.step-card:hover .step-card__hover {
+  opacity: 1;
+}
+
+/* ============================================================
+   ЭКРАН 3 — «Пять профессиональных треков» (бенто)
+   ============================================================ */
+.tracks {
+  position: relative;
+  padding-top: 200px;
+  padding-bottom: 120px;
+}
+
+/* фоновый эллипс-свечение: SVG из Figma (эллипс + feGaussianBlur stdDev=200 + Grass5→Yellow)
+   Координаты пересчитаны с 1920→1440px (×0.75) */
+.tracks::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 120px;
+  width: 3061px;
+  height: 1461px;
+  background: url('../assets/img/tracks/ellipse-bg.svg') center / 100% 100% no-repeat;
+  z-index: 0;
+  pointer-events: none;
+}
+
+
+/* 3D-«#» в левом-нижнем углу секции */
+.tracks__3d {
+  position: absolute;
+  left: max(-80px, calc(50% - 800px));
+  bottom: 10px;
+  width: 300px;
+  height: auto;
+  filter: blur(1px);
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.tracks__title {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  font-weight: 600;
+  font-size: 72px;
+  line-height: 1;
+  color: var(--grafite);
+  margin-bottom: 60px;
+}
+
+.tracks__grid {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.tracks__row {
+  display: flex;
+  gap: 20px;
+  align-items: stretch;
+  justify-content: center;
+}
+
+/* --- Карточка трека (фрост-стекло) --- */
+.track-card {
+  position: relative;
+  flex: none;
+  width: 420px;
+  min-height: 479px;
+  display: flex;
+  flex-direction: column;
+  padding: 30px 30px 35px 35px;
+  border-radius: 35px;
+  background: var(--white-70);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: inset 1px 1px 0 0 var(--white);
+  transition: background-color 0.35s ease, box-shadow 0.35s ease;
+}
+.track-card--wide {
+  width: 640px;
+  min-height: 392px;
+}
+.track-card:hover {
+  background: var(--white);
+  box-shadow:
+    inset 1px 1px 0 0 var(--white),
+    -5px -5px 30px 0 rgba(255, 255, 255, 0.5),
+    5px 5px 30px 0 rgba(255, 255, 255, 0.5);
+}
+
+.track-card__head {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
+.track-card__title {
+  flex: 1;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 1;
+  color: var(--grafite);
+}
+.track-card__badge {
+  flex: none;
+  position: relative;
+  top: -5px;                /* центровка по тексту заголовка (без влияния на раскладку) */
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 18px 6px;   /* 38px высотой, +3px вниз — оптическая центровка «60 ч» */
+  box-shadow: inset 0 0 0 2px var(--sber-green);
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1;
+  color: var(--sber-green);
+  white-space: nowrap;
+  transition: background-color 0.35s ease;
+}
+.track-card:hover .track-card__badge {
+  background: var(--sber-green-20);
+}
+
+.track-card__desc {
+  margin-top: 20px;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.2;
+  color: var(--grafite);
+}
+
+.track-card__tags {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.track-card__tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 11px 13px 9px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--grafite);
+  white-space: nowrap;
+}
+
+.track-card__btn {
+  position: relative;
+  align-self: flex-start;
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15.5px 24px 12.5px;       /* +1.5px вниз — оптическая центровка */
+  border-radius: 100px;
+  background: var(--sber-green);
+  color: var(--white);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+/* hover: градиент sber-green → spring-5 */
+.track-card__btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(84.7deg, var(--sber-green) 30%, var(--spring-5) 100%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.track-card__btn span { position: relative; z-index: 1; }
+.track-card__btn:hover::before { opacity: 1; }
+/* click: светлая заливка + рамка (inset-тень, без сдвига размеров) + зелёный текст */
+.track-card__btn:active {
+  background: var(--sber-green-20);
+  box-shadow: inset 0 0 0 1.5px var(--sber-green);
+  color: var(--sber-green);
+}
+.track-card__btn:active::before { opacity: 0; }
+
+/* ============================================================
+   ЭКРАН 4 — «Обязательная база и трек по выбору»
+   ============================================================ */
+.program {
+  padding-top: 100px;
+  padding-bottom: 120px;
+}
+
+.program__title {
+  text-align: center;
+  font-weight: 600;
+  font-size: 72px;
+  line-height: 1;
+  color: var(--grafite);
+  margin-bottom: 30px;
+}
+
+.program__subtitle {
+  text-align: center;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.2;
+  color: var(--grafite);
+  max-width: 1300px;
+  margin: 0 auto 60px;
+}
+
+.program__row {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* --- Карточка программы --- */
+.prog-card {
+  position: relative;
+  flex: none;
+  height: 640px;
+  border-radius: 35px;
+}
+.prog-card--base  { width: 530px; }
+.prog-card--track { width: 750px; }
+
+/* Фоновый слой: градиент + 3D, обрезается скруглением */
+.prog-card__bg {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
+  pointer-events: none;
+}
+.prog-card--base .prog-card__bg {
+  background: linear-gradient(73deg,
+    rgba(254, 177, 106, 0.5)  4%,
+    rgba(255, 243, 134, 0.5) 50%,
+    rgba(255, 250, 207, 0.5) 96%);
+}
+.prog-card--track .prog-card__bg {
+  background: linear-gradient(61deg,
+    rgba(255, 250, 207, 0.5)  1%,
+    rgba(157, 241, 157, 0.5) 100%);
+}
+
+/* 3D объекты в фоне */
+.prog-card__3d {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Левая карточка — единая 3D-композиция (Figma node 200:843, 491×346px) */
+.prog-card__3d--composition {
+  width: 491px;
+  height: 346px;
+  left: 39px;
+  top: 294px;
+  object-fit: contain;
+}
+
+/* Правая карточка — 3D */
+.prog-card__3d--big {
+  width: 867px; height: 691px;
+  left: -309px; top: 295px;
+  object-fit: cover;
+}
+.prog-card__3d--small {
+  width: 476px; height: 439px;
+  left: 505px; top: 44px;
+  object-fit: cover;
+}
+
+/* Контентный слой */
+.prog-card__content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 35px 30px 35px 35px;
+}
+
+.prog-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 45px;
+  width: 100%;
+}
+
+/* Блок «о карточке»: фиксированная высота — desc позиционируется абсолютно */
+.prog-card__about {
+  position: relative;
+  height: 251px;
+  width: 100%;
+}
+
+.prog-card__header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+}
+/* Правая карточка: контент не заезжает под 3D-объект сверху справа */
+.prog-card__header--track { right: 59px; }
+
+/* Метка-бейдж */
+.prog-card__label {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  padding: 13px 20px 9px;   /* +2px вниз — оптическая центровка SB Sans */
+  border-radius: 100px;
+  box-shadow: inset 0 0 0 2px currentColor;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1;
+  white-space: nowrap;
+}
+.prog-card__label--green  { color: var(--sber-green); }
+.prog-card__label--orange { color: var(--orange-6); }
+
+.prog-card__title {
+  margin: 0;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 1;
+  color: var(--grafite);
+}
+
+.prog-card__desc {
+  position: absolute;
+  top: 135px;
+  left: 0;
+  right: 0;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.2;
+  color: var(--grafite);
+}
+.prog-card__desc--track { right: 59px; }
+
+/* Список модулей */
+.prog-card__modules {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.prog-card__modules--grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 45px;
+  row-gap: 15px;
+  width: 100%;
+}
+.prog-card__module {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.prog-card__atom {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--white);
+  padding-top: 5px;  /* оптическая центровка: SB Sans сидит выше геометрического центра */
+}
+.prog-card__atom--green  { background: var(--sber-green); }
+.prog-card__atom--orange { background: var(--orange-6); }
+
+.prog-card__module-name {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1;
+  color: var(--grafite);
+  white-space: nowrap;
+}
+
+/* Стеклянные плашки снизу */
+.prog-card__stats {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: auto;
+}
+.prog-stat {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding: 12px 20px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: inset 1px 1px 0 0 var(--white);
+}
+.prog-stat__num {
+  font-weight: 600;
+  font-size: 56px;
+  line-height: 1;
+  letter-spacing: -1.12px;
+  color: var(--sber-green);
+  white-space: nowrap;
+  transform: translateY(6px);  /* оптическая центровка крупных цифр SB Sans */
+}
+.prog-stat__label {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1;        /* 100% как в макете */
+  color: var(--grafite);
+  white-space: nowrap;
+  transform: translateY(2px);  /* выравниваем визуальный центр с цифрой */
+}
+
+/* ============================================================
+   ЭКРАН 5 — «Коротко о главном» (FAQ + info-карточки)
+   ============================================================ */
+.faq {
+  position: relative;
+  padding-top: 80px;
+  padding-bottom: 130px;
+}
+
+/* фоновый эллипс из Figma: stdDeviation=400, Grass5→Yellow, смещён вправо */
+.faq::before {
+  content: "";
+  position: absolute;
+  left: calc(50% - 837px);  /* = 50% - (720 - (-117)); привязка к центру контента */
+  top: -639px;
+  width: 2946px;
+  height: 2471px;
+  background: url('../assets/img/faq/ellipse-bg.svg') center / 100% 100% no-repeat;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* 3D-сферы — декоративные элементы в правом верхнем углу */
+.faq__sphere-small {
+  position: absolute;
+  width: 178px;
+  height: 180px;
+  left: calc(50% + 455px);  /* = 50% + (1175 - 720); привязка к центру контента */
+  top: 50px;
+  transform: scaleX(-1) rotate(90deg);
+  filter: blur(3.5px);
+  z-index: 2;
+  pointer-events: none;
+  user-select: none;
+}
+
+.faq__sphere-big {
+  position: absolute;
+  width: 473px;
+  height: 481px;
+  left: calc(50% + 608px);  /* = 50% + (1328 - 720); привязка к центру контента */
+  top: 62px;
+  z-index: 2;
+  pointer-events: none;
+  user-select: none;
+}
+
+.faq__title {
+  position: relative;
+  z-index: 3;
+  font-weight: 600;
+  font-size: 72px;
+  line-height: 1;
+  color: var(--grafite);
+  text-align: center;
+  margin: 0 0 60px;
+}
+
+.faq__layout {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  gap: 20px;
+  align-items: stretch;
+}
+
+/* ---- Левая колонка: 2 инфо-карточки ---- */
+.faq__sidebar {
+  flex: none;
+  width: 530px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.faq-card {
+  position: relative;
+  border-radius: 35px;
+  overflow: hidden;
+}
+
+/* Email card */
+.faq-card--email {
+  flex: none;
+  height: 283px;
+  background: linear-gradient(47.76deg, rgba(104,234,104,0.65) 7.73%, rgba(255,243,134,0.65) 104.92%);
+}
+
+.faq-card__envelope {
+  position: absolute;
+  /* Figma: container left=307 top=29 w=384 h=372, img 318×300 flex-centered */
+  left: 340px;   /* 307 + (384-318)/2 */
+  top: 65px;     /* 29 + (372-300)/2 */
+  width: 318px;
+  height: 300px;
+  transform: rotate(-15deg) skewX(-0.11deg);
+  transform-origin: center;
+  pointer-events: none;
+}
+
+.faq-card__body {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 35px;
+}
+
+.faq-card__text {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 370px;
+}
+
+.faq-card__title {
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 1;
+  color: var(--grafite);
+  margin: 0;
+}
+
+.faq-card__desc {
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.2;
+  color: var(--grafite);
+  margin: 0;
+}
+
+.faq-card__btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  padding: 22px 28px 18px;
+  background: var(--sber-green);
+  border-radius: 100px;
+  color: var(--white);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease, color 0.2s ease;
+}
+.faq-card__btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--grad-button-hover);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.faq-card__btn span { position: relative; z-index: 1; }
+.faq-card__btn:hover::before { opacity: 1; }
+.faq-card__btn:active {
+  background: var(--sber-green-20);
+  box-shadow: inset 0 0 0 1.5px var(--sber-green);
+  color: var(--sber-green);
+}
+.faq-card__btn:active::before { opacity: 0; }
+
+/* Subscribe card */
+.faq-card--subscribe {
+  flex: 1;
+  background: linear-gradient(58.24deg, rgba(255,200,134,0.65) 7.73%, rgba(255,243,134,0.65) 104.92%);
+  padding: 34px 35px 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.faq-card--subscribe .faq-card__text {
+  max-width: 100%;
+}
+
+.faq-card__channel {
+  font-size: 24px;
+  line-height: 1.1;
+  color: var(--grafite);
+  margin: 0;
+}
+.faq-card__channel strong { font-weight: 600; }
+
+/* ---- Правая колонка: FAQ аккордеон ---- */
+.faq__list {
+  flex: none;
+  width: 750px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.faq__item {
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+.faq__question {
+  width: 100%;
+  min-height: 94px;
+  padding: 22px 30px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  position: relative;
+  font-family: var(--font);
+}
+
+/* Стеклянный фон закрытого состояния */
+.faq__question::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+/* Внутренняя подсветка */
+.faq__question::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 1px 1px 0 0 var(--white);
+  pointer-events: none;
+}
+
+.faq__question span {
+  position: relative;
+  flex: 1;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.1;
+  color: var(--sber-green);
+}
+
+.faq__arrow {
+  position: relative;
+  flex: none;
+  width: 34px;
+  height: 34px;
+  transition: transform 0.3s ease;
+  pointer-events: none;
+}
+
+/* Ответ — скрытый по умолчанию */
+.faq__answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+  background: var(--white);
+}
+
+.faq__answer p {
+  padding: 0 30px 28px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.2;
+  color: var(--grafite);
+  margin: 0;
+}
+
+/* ОТКРЫТОЕ СОСТОЯНИЕ */
+.faq__item.is-open .faq__question {
+  background: var(--white);
+}
+.faq__item.is-open .faq__question::before {
+  opacity: 0;
+}
+.faq__item.is-open .faq__arrow {
+  transform: rotate(90deg);
+}
+.faq__item.is-open .faq__answer {
+  max-height: 250px;
+}
+
+/* ============================================================
+   ЭКРАН 6 — CTA «Пять треков ждут, выбирай свой»
+   ============================================================ */
+.cta {
+  position: relative;
+  padding-top: 80px;
+  padding-bottom: 130px;
+  /* overflow: visible — эллипс плавно перетекает в блок выше */
+}
+
+/* Фоновый эллипс: Peach→Yellow→Light-yellow (45°), перетекает в эллипс FAQ */
+.cta::before {
+  content: "";
+  position: absolute;
+  left: calc(50% - 100px);
+  bottom: -150px;
+  width: 1300px;
+  height: 950px;
+  background: linear-gradient(45deg,
+    var(--peach)        0%,
+    var(--yellow)      84%,
+    var(--light-yellow) 100%);
+  border-radius: 50%;
+  filter: blur(800px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* 3D-композиция: правая половина, выходит за пределы секции сверху и снизу */
+.cta__3d {
+  position: absolute;
+  width: 854px;
+  height: auto;
+  left: calc(50% - 90px);
+  top: -57px;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+}
+
+.cta__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.cta__title {
+  font-weight: 600;
+  font-size: 72px;
+  line-height: 1;
+  color: var(--grafite);
+  margin: 0 0 30px;
+  white-space: nowrap;
+}
+
+.cta__desc {
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.2;
+  color: var(--grafite);
+  max-width: 583px;
+  margin: 0 0 60px;
+}
+
+/* Кнопка: идентична .hero__cta */
+.cta__btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 310px;
+  border-radius: 20px;
+  background: var(--sber-green);
+  color: var(--white);
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 28px 40px;
+  text-decoration: none;
+}
+.cta__btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(84.01deg, var(--sber-green) 29.93%, var(--spring-5) 99.75%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.cta__btn:hover::before { opacity: 1; }
+.cta__btn span { position: relative; z-index: 1; transform: translateY(3px); }
+
+/* ============================================================
+   АНИМАЦИИ
+   ============================================================ */
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-14px); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Hero: заголовок → подзаголовок → кнопка появляются снизу */
+  .hero__title    { animation: fade-up .75s cubic-bezier(.22,1,.36,1) .15s both; }
+  .hero__subtitle { animation: fade-up .75s cubic-bezier(.22,1,.36,1) .35s both; }
+  .hero__cta      { animation: fade-up .75s cubic-bezier(.22,1,.36,1) .55s both; }
+
+  /* 3D-левитация: Hero и CTA */
+  .hero__3d,
+  .cta__3d  { animation: float 5s ease-in-out infinite; }
+
+  /* Scroll-анимации: начальное состояние — добавляется через JS */
+  .js-anim {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity  .7s cubic-bezier(.22,1,.36,1) var(--stagger, 0s),
+      transform .7s cubic-bezier(.22,1,.36,1) var(--stagger, 0s);
+  }
+  .js-anim.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Slide-in для карточек программы */
+@media (prefers-reduced-motion: no-preference) {
+  .js-slide-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity .75s cubic-bezier(.22,1,.36,1), transform .75s cubic-bezier(.22,1,.36,1);
+  }
+  .js-slide-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity .75s cubic-bezier(.22,1,.36,1) .1s, transform .75s cubic-bezier(.22,1,.36,1) .1s;
+  }
+  .js-slide-left.is-visible,
+  .js-slide-right.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Stagger-задержки для FAQ */
+.faq-card--email     { --stagger: .08s; }
+.faq-card--subscribe { --stagger: .20s; }
+.faq__list .faq__item:nth-child(1) { --stagger: .06s; }
+.faq__list .faq__item:nth-child(2) { --stagger: .13s; }
+.faq__list .faq__item:nth-child(3) { --stagger: .20s; }
+.faq__list .faq__item:nth-child(4) { --stagger: .27s; }
+.faq__list .faq__item:nth-child(5) { --stagger: .34s; }
+.faq__list .faq__item:nth-child(6) { --stagger: .41s; }
+.faq__list .faq__item:nth-child(7) { --stagger: .48s; }
+
+/* Stagger-задержки для CTA */
+.cta__title { --stagger: .10s; }
+.cta__desc  { --stagger: .22s; }
+.cta__btn   { --stagger: .34s; }
+
+/* Stagger-задержки для карточек шагов */
+.steps__grid .step-card:nth-child(1) { --stagger: .10s; }
+.steps__grid .step-card:nth-child(2) { --stagger: .22s; }
+.steps__grid .step-card:nth-child(3) { --stagger: .34s; }
+
+/* Stagger-задержки для карточек треков (2 ряда по .tracks__row) */
+.tracks__row:nth-child(1) .track-card:nth-child(1) { --stagger: .08s; }
+.tracks__row:nth-child(1) .track-card:nth-child(2) { --stagger: .18s; }
+.tracks__row:nth-child(2) .track-card:nth-child(1) { --stagger: .08s; }
+.tracks__row:nth-child(2) .track-card:nth-child(2) { --stagger: .18s; }
+.tracks__row:nth-child(2) .track-card:nth-child(3) { --stagger: .28s; }
+
+
+
+/* ============================================================
+   МОДАЛЬНОЕ ОКНО — попап трека (по макету Figma)
+   ============================================================ */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(40, 52, 56, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s ease, visibility 0s .3s;
+}
+
+.modal-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .3s ease, visibility 0s 0s;
+}
+
+/* Внешний контейнер: overflow:hidden + border-radius физически обрезает скроллбар по скруглениям */
+.modal {
+  background: #fff;
+  border-radius: 32px;
+  width: 100%;
+  max-width: 1060px;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding-right: 5px;        /* 5px зазор между скроллбаром и правой стенкой */
+  position: relative;
+  transform: scale(0.96) translateY(16px);
+  opacity: 0;
+  transition: transform .4s cubic-bezier(.22,1,.36,1), opacity .4s cubic-bezier(.22,1,.36,1);
+}
+
+.modal-overlay.is-open .modal {
+  transform: none;
+  opacity: 1;
+}
+
+/* Внутренняя скролл-зона: тут живут padding и скроллбар */
+.modal__scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 44px 30px 44px 48px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--sber-green) transparent;
+}
+.modal__scroll::-webkit-scrollbar { width: 22px; }  /* thumb 12px + 10px зазор справа */
+.modal__scroll::-webkit-scrollbar-track { background: transparent; margin-top: 40px; margin-bottom: 40px; }
+.modal__scroll::-webkit-scrollbar-thumb {
+  background: var(--sber-green);
+  border-radius: 100px;
+  border-right: 10px solid transparent;
+  background-clip: padding-box;
+  min-height: 40px;
+}
+
+/* Кнопка закрытия — SVG-крест со stroke-linecap="round" */
+.modal__close {
+  position: absolute;
+  top: 26px;
+  right: 26px;
+  width: 38px;
+  height: 38px;
+  border: 2px solid var(--grafite);
+  border-radius: 50%;
+  background: transparent url("data:image/svg+xml,%3Csvg width='38' height='38' viewBox='0 0 38 38' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 12L26 26M26 12L12 26' stroke='%23283438' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat;
+  cursor: pointer;
+  padding: 0;
+  transition: border-color .2s, background-image .2s;
+  z-index: 2;
+}
+.modal__close::before,
+.modal__close::after { display: none; }
+.modal__close:hover {
+  border-color: var(--sber-green);
+  background-image: url("data:image/svg+xml,%3Csvg width='38' height='38' viewBox='0 0 38 38' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 12L26 26M26 12L12 26' stroke='%2321A038' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* ---------- Шапка ---------- */
+.modal__head { margin-bottom: 60px; padding-right: 50px; }
+
+.modal__title-row {
+  display: flex;
+  align-items: baseline;   /* baseline = базовые линии заголовка и бейджа совпадают */
+  gap: 16px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.modal__title {
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--grafite);
+  margin: 0;
+}
+
+.modal__hours {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 6px 20px 0;       /* SB Sans: em-box > font-size, глиф в верхней части → сдвиг вниз */
+  background: var(--sber-green);
+  color: #fff;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1;
+  border-radius: 100px;
+  white-space: nowrap;
+  transform: translateY(-7px);
+}
+
+.modal__tags {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.modal__tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 11px 13px 9px;
+  background: #9DF19D;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--grafite);
+  line-height: 1;
+}
+
+.modal__desc {
+  font-size: 18px;
+  color: var(--grafite);
+  line-height: 1.35;
+  margin: 0 0 30px;
+  max-width: 720px;
+}
+
+.modal__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  padding: 4px 30px 0;  /* +4px сверху — оптическая коррекция SB Sans */
+  background: var(--sber-green);
+  color: #fff;
+  border-radius: 100px;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  transition: background .35s cubic-bezier(.22,1,.36,1);
+}
+.modal__cta:hover {
+  background: linear-gradient(90deg, var(--sber-green) 30%, var(--spring-5) 100%);
+}
+
+/* ---------- Тело: две колонки ---------- */
+.modal__body {
+  display: grid;
+  grid-template-columns: minmax(0, 410px) 1fr;
+  gap: 44px;
+  align-items: start;
+}
+.modal__col { display: flex; flex-direction: column; gap: 30px; }
+.modal__col--right .modal__section + .modal__section { margin-top: 10px; } /* gap 30 + 10 = 40px до лидеров */
+
+/* Заголовки секций — тёмные, не зелёные */
+.modal__section-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--grafite);
+  margin: 0 0 16px;
+  line-height: 1.1;
+}
+
+/* ---------- «Для кого этот трек» ---------- */
+.modal__for-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.modal__for-list li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 16px;
+  color: var(--grafite);
+  line-height: 1.25;
+}
+.modal__for-list li::before {
+  content: '';
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  margin-top: 2px;
+  /* крест на 1px меньше (M12 7v10 M7 12h10), окружность r=11, stroke 2px */
+  background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='12' r='11' stroke='%2321A038' stroke-width='2'/%3E%3Cpath d='M12 7v10M7 12h10' stroke='%2321A038' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* ---------- Зелёная карточка «Что ты сможешь» ---------- */
+.modal__skills {
+  background: rgba(157, 241, 157, 0.5);
+  border: 2px solid var(--sber-green);
+  border-radius: 24px;
+  padding: 26px 28px 28px;
+}
+.modal__skills-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--grafite);
+  margin: 0 0 18px;
+  line-height: 1.15;
+}
+.modal__skills-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.modal__skills-list li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 16px;
+  color: var(--grafite);
+  line-height: 1.25;
+}
+.modal__skills-list li::before {
+  content: '';
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--sber-green);
+  margin-top: 6px;
+}
+
+/* ---------- «Состав трека» — серые плашки ---------- */
+.modal__modules {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: module-counter;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.modal__modules li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  background: #F3F3F3;
+  border-radius: 14px;
+  counter-increment: module-counter;
+  min-height: 58px;
+}
+.modal__modules li::before {
+  content: counter(module-counter, decimal-leading-zero);
+  flex-shrink: 0;
+  align-self: center;
+  width: 30px;
+  height: 30px;
+  background: var(--sber-green);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 600;
+  /* display: block + line-height = стабильное центрирование во всех браузерах */
+  display: block;
+  text-align: center;
+  line-height: 32px;   /* 32 > 30 → SB Sans сдвигается чуть вниз, оптический центр */
+  letter-spacing: -0.01em;
+}
+.modal__mod-name {
+  flex: 1;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--grafite);
+  line-height: 1.2;
+}
+.modal__mod-hours {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--sber-green);
+  white-space: nowrap;
+}
+
+/* ---------- Лидеры ---------- */
+.modal__liders {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 20px;
+}
+.modal__lider {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+.modal__lider-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background-color: #E8EDEE;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 52 52' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='26' cy='19' r='9' fill='%23B0BEC5'/%3E%3Cellipse cx='26' cy='40' rx='15' ry='12' fill='%23B0BEC5'/%3E%3C/svg%3E");
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--sber-green);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.modal__lider-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.modal__lider-info strong {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--grafite);
+  line-height: 1;
+}
+.modal__lider-info span {
+  font-size: 13px;
+  color: #8A989C;
+  line-height: 1.2;
+}
+
+/* ---------- Адаптив ---------- */
+@media (max-width: 860px) {
+  .modal { padding: 32px 20px 32px 28px; }
+  .modal__title { font-size: 36px; }
+  .modal__body { grid-template-columns: 1fr; gap: 32px; }
+}

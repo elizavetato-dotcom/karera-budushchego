@@ -1,0 +1,35 @@
+/* SB Sans Display — фирменный шрифт SberStudent.
+   Light и Thin по гайдлайнам не используем. */
+
+@font-face {
+  font-family: 'SB Sans Display';
+  src: url('../assets/fonts/SBSansDisplay-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SB Sans Display';
+  src: url('../assets/fonts/SBSansDisplay-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SB Sans Display';
+  src: url('../assets/fonts/SBSansDisplay-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Расширенное полужирное — для крупных заголовков */
+@font-face {
+  font-family: 'SB Sans Display Extended';
+  src: url('../assets/fonts/SBSansDisplay-ExtendedSemibold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
