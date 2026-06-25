@@ -498,7 +498,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: 120px;
+  top: 90px;
   width: 3061px;
   height: 1461px;
   background: url('../assets/img/tracks/ellipse-bg.svg') center / 100% 100% no-repeat;
@@ -1734,9 +1734,115 @@ ul { margin: 0; padding: 0; list-style: none; }
   line-height: 1.2;
 }
 
-/* ---------- Адаптив ---------- */
+/* ---------- Адаптив попапа ---------- */
 @media (max-width: 860px) {
   .modal { padding: 32px 20px 32px 28px; }
   .modal__title { font-size: 36px; }
   .modal__body { grid-template-columns: 1fr; gap: 32px; }
+}
+
+/* ============================================================
+   MOBILE 560 — HERO
+   ============================================================ */
+@media (max-width: 768px) {
+
+  /* Контейнер: высота по контенту */
+  .hero {
+    height: auto;
+    min-height: 100svh;
+  }
+
+  /* Stage: сбрасываем фиксированный холст, переключаем в flex-колонку */
+  .hero__stage {
+    width: 100%;
+    height: auto;
+    min-height: 100svh;
+    margin: 0;
+    padding: 0 20px 52px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* 3D: абсолютно справа, перекрывает заголовок сверху */
+  .hero__3d {
+    position: absolute;
+    top: -10px;
+    left: auto;
+    right: -24px;
+    width: 70%;
+    height: auto;
+    z-index: 2;
+  }
+
+  /* Nav: только лого, без ссылок */
+  .menu {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    padding: 24px 0 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+  }
+  .menu__nav { display: none; }
+
+  /* Заголовок: потоковый, левая половина */
+  .hero__title {
+    position: relative;
+    top: auto; left: auto;
+    width: 54%;
+    white-space: normal;
+    font-size: 56px;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    margin-top: 24px;
+    z-index: 3;
+  }
+
+  /* Подзаголовок */
+  .hero__subtitle {
+    position: relative;
+    top: auto; left: auto;
+    font-size: 16px;
+    line-height: 1.35;
+    margin-top: 20px;
+    max-width: none;
+    z-index: 3;
+  }
+
+  /* CTA-кнопка */
+  .hero__cta {
+    position: relative;
+    top: auto; left: auto;
+    align-self: flex-start;
+    margin-top: 24px;
+    padding: 16px 28px;
+    font-size: 18px;
+    height: auto;
+    z-index: 3;
+  }
+
+  /* Стеклянные плашки: потоковые, в ряд внизу */
+  .glass-stat {
+    position: relative;
+    top: auto; left: auto;
+    padding: 8px 14px;
+    gap: 10px;
+    border-radius: 14px;
+  }
+  .glass-stat__num   { font-size: 36px; transform: translateY(4px); }
+  .glass-stat__label { font-size: 14px; transform: translateY(1px); }
+
+  /* Обёртка статов — три плашки в ряд */
+  .hero__stats-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: auto;
+    padding-top: 32px;
+    z-index: 3;
+    position: relative;
+  }
 }
