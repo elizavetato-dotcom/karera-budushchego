@@ -475,8 +475,6 @@ ul { margin: 0; padding: 0; list-style: none; }
 .step-card__hover {
   opacity: 0;
   transition: opacity 0.55s ease-in-out;
-  will-change: opacity;
-  backface-visibility: hidden;
 }
 .step-card:hover .step-card__hover {
   opacity: 1;
