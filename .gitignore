@@ -1,2 +1,5 @@
 # Временные референс-кропы из Figma (для анализа, не часть проекта)
 .figma-ref/
+
+# Local dev preview config
+.claude/

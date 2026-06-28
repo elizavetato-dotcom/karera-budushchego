@@ -9,6 +9,21 @@
   <link id="main-css" rel="stylesheet" href="css/styles.css">
   <!-- DEV: всегда подтягивать свежий CSS (обход кеша сервера во время разработки) -->
   <script>document.getElementById('main-css').href = 'css/styles.css?t=' + Date.now();</script>
+  <!-- Масштаб мобильного холста hero (560px → ширина вьюпорта). Безразмерный коэффициент для zoom. -->
+  <script>
+    (function () {
+      function setHeroScale() {
+        var w = document.documentElement.clientWidth;
+        document.documentElement.style.setProperty('--hero-scale', w / 560);
+      }
+      setHeroScale();
+      // Пересчёт после раскладки: clientWidth учитывает скролл-бар,
+      // который появляется только когда контент отрисован.
+      document.addEventListener('DOMContentLoaded', setHeroScale);
+      window.addEventListener('load', setHeroScale);
+      window.addEventListener('resize', setHeroScale);
+    }());
+  </script>
 </head>
 <body>
 
@@ -25,8 +40,14 @@
       <!-- Контентный слой: фиксированные 1440px по центру, не масштабируется -->
       <div class="hero__stage">
 
+        <!-- Мобильный фон (peach + glows): внутри холста, масштабируется вместе с ним -->
+        <img class="hero__bg-mobile" src="assets/img/hero-bg-mobile.png" alt="" aria-hidden="true">
+
         <!-- 3D-композиция (выгружена из Figma, прозрачный PNG) -->
         <img class="hero__3d" src="assets/img/hero-3d.png?v=2" alt="" aria-hidden="true">
+
+        <!-- Мобильная 3D-композиция (отдельный кадр из Figma) -->
+        <img class="hero__3d-mobile" src="assets/img/hero-3d-mobile.png" alt="" aria-hidden="true">
 
         <!-- Меню -->
         <nav class="menu" aria-label="Основная навигация">
@@ -42,6 +63,10 @@
             <li><a href="#">Экскурсии</a></li>
             <li><a href="#">Мероприятия</a></li>
           </ul>
+          <!-- Бургер (только мобилка) -->
+          <button class="menu__burger" type="button" aria-label="Открыть меню">
+            <span></span><span></span><span></span>
+          </button>
         </nav>
 
         <!-- Заголовок. Бейдж «2.0» заезжает на «о» в «будущего» и уходит под 3D -->
@@ -86,7 +111,7 @@
          ============================================================ -->
     <section class="steps">
       <div class="section">
-        <h2 class="steps__title">От выбора трека до сертификата</h2>
+        <h2 class="steps__title">От&nbsp;выбора трека до&nbsp;сертификата</h2>
 
         <div class="steps__grid">
 
@@ -94,18 +119,24 @@
             aria-label="Шаг 1. Выбираешь свой трек. Пять треков под разные интересы. Берёшь один — тот, что близок. Остальные доступны параллельно, если захочешь.">
             <img class="step-card__img" src="assets/img/steps/step1-default.png" alt="">
             <img class="step-card__img step-card__hover" src="assets/img/steps/step1-hover.png" alt="" aria-hidden="true">
+            <img class="step-card__img-m" src="assets/img/steps/m-step1.png" alt="" aria-hidden="true">
+            <img class="step-card__img-m step-card__img-m--hover" src="assets/img/steps/m-step1-hover.png" alt="" aria-hidden="true">
           </article>
 
           <article class="step-card"
             aria-label="Шаг 2. Проходишь курсы и интервью. Электронные курсы СберУниверситета плюс живые разговоры с лидерами экосистемы Сбера и прикладной кейс. Бесплатно, в своём темпе, 24/7.">
             <img class="step-card__img" src="assets/img/steps/step2-default.png" alt="">
             <img class="step-card__img step-card__hover" src="assets/img/steps/step2-hover.png" alt="" aria-hidden="true">
+            <img class="step-card__img-m" src="assets/img/steps/m-step2.png" alt="" aria-hidden="true">
+            <img class="step-card__img-m step-card__img-m--hover" src="assets/img/steps/m-step2-hover.png" alt="" aria-hidden="true">
           </article>
 
           <article class="step-card"
             aria-label="Шаг 3. Получаешь сертификат. После прохождения всех материалов трека ты получаешь именной электронный сертификат от СберУниверситета.">
             <img class="step-card__img" src="assets/img/steps/step3-default.png" alt="">
             <img class="step-card__img step-card__hover" src="assets/img/steps/step3-hover.png" alt="" aria-hidden="true">
+            <img class="step-card__img-m" src="assets/img/steps/m-step3.png" alt="" aria-hidden="true">
+            <img class="step-card__img-m step-card__img-m--hover" src="assets/img/steps/m-step3-hover.png" alt="" aria-hidden="true">
           </article>
 
         </div>
@@ -202,6 +233,15 @@
 
           </div>
 
+        </div>
+
+        <!-- Пагинация горизонтального скролла (только мобилка) -->
+        <div class="tracks__dots" aria-label="Навигация по трекам">
+          <button class="tracks__dot is-active" type="button" aria-label="Трек 1"></button>
+          <button class="tracks__dot" type="button" aria-label="Трек 2"></button>
+          <button class="tracks__dot" type="button" aria-label="Трек 3"></button>
+          <button class="tracks__dot" type="button" aria-label="Трек 4"></button>
+          <button class="tracks__dot" type="button" aria-label="Трек 5"></button>
         </div>
       </div>
     </section>

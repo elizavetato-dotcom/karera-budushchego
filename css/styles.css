@@ -357,7 +357,9 @@ ul { margin: 0; padding: 0; list-style: none; }
   align-items: center;
   justify-content: center;
   width: 310px;
-  border-radius: 20px;
+  border-radius: 25px;
+  /* Суперэллипс: Figma corner radius 25 + corner smoothing 60% (310×88) */
+  clip-path: path("M 270 0 c 14.0013 0 21.0020 0 26.3498 2.7248 a 25.0000 25.0000 0 0 1 10.9254 10.9254 c 2.7248 5.3478 2.7248 12.3484 2.7248 26.3498 L 310 48 c 0 14.0013 0 21.0020 -2.7248 26.3498 a 25.0000 25.0000 0 0 1 -10.9254 10.9254 c -5.3478 2.7248 -12.3484 2.7248 -26.3498 2.7248 L 40 88 c -14.0013 0 -21.0020 0 -26.3498 -2.7248 a 25.0000 25.0000 0 0 1 -10.9254 -10.9254 c -2.7248 -5.3478 -2.7248 -12.3484 -2.7248 -26.3498 L 0 40 c 0 -14.0013 0 -21.0020 2.7248 -26.3498 a 25.0000 25.0000 0 0 1 10.9254 -10.9254 c 5.3478 -2.7248 12.3484 -2.7248 26.3498 -2.7248 Z");
   background: var(--sber-green);
   color: var(--white);
   font-weight: 600;
@@ -1274,7 +1276,9 @@ ul { margin: 0; padding: 0; list-style: none; }
   align-items: center;
   justify-content: center;
   width: 310px;
-  border-radius: 20px;
+  border-radius: 25px;
+  /* Суперэллипс: Figma corner radius 25 + corner smoothing 60% (310×88) */
+  clip-path: path("M 270 0 c 14.0013 0 21.0020 0 26.3498 2.7248 a 25.0000 25.0000 0 0 1 10.9254 10.9254 c 2.7248 5.3478 2.7248 12.3484 2.7248 26.3498 L 310 48 c 0 14.0013 0 21.0020 -2.7248 26.3498 a 25.0000 25.0000 0 0 1 -10.9254 10.9254 c -5.3478 2.7248 -12.3484 2.7248 -26.3498 2.7248 L 40 88 c -14.0013 0 -21.0020 0 -26.3498 -2.7248 a 25.0000 25.0000 0 0 1 -10.9254 -10.9254 c -2.7248 -5.3478 -2.7248 -12.3484 -2.7248 -26.3498 L 0 40 c 0 -14.0013 0 -21.0020 2.7248 -26.3498 a 25.0000 25.0000 0 0 1 10.9254 -10.9254 c 5.3478 -2.7248 12.3484 -2.7248 26.3498 -2.7248 Z");
   background: var(--sber-green);
   color: var(--white);
   font-weight: 600;
@@ -1317,8 +1321,9 @@ ul { margin: 0; padding: 0; list-style: none; }
   .hero__subtitle { animation: fade-up .75s cubic-bezier(.22,1,.36,1) .35s both; }
   .hero__cta      { animation: fade-up .75s cubic-bezier(.22,1,.36,1) .55s both; }
 
-  /* 3D-левитация: Hero и CTA */
+  /* 3D-левитация: Hero (десктоп + мобилка) и CTA */
   .hero__3d,
+  .hero__3d-mobile,
   .cta__3d  { animation: float 5s ease-in-out infinite; }
 
   /* Scroll-анимации: начальное состояние — добавляется через JS */
@@ -1333,6 +1338,12 @@ ul { margin: 0; padding: 0; list-style: none; }
     opacity: 1;
     transform: none;
   }
+}
+
+/* Мобилка: стеклянные плашки левитируют в синхроне с 3D-композицией
+   (та же анимация float, тот же тайминг — двигаются как единое целое) */
+@media (max-width: 768px) and (prefers-reduced-motion: no-preference) {
+  .glass-stat { animation: float 5s ease-in-out infinite; }
 }
 
 /* Slide-in для карточек программы */
@@ -1741,106 +1752,429 @@ ul { margin: 0; padding: 0; list-style: none; }
 
 /* ============================================================
    MOBILE 560 — HERO
+   Дизайн: фрейм 560 (Figma 241:1574). Элементы спозиционированы
+   абсолютно в координатах макета; .hero__stage — фиксированный
+   холст 560px, масштабируется по ширине вьюпорта через zoom.
+   ============================================================ */
+.hero__bg-mobile,
+.hero__3d-mobile,
+.menu__burger,
+.step-card__img-m,
+.tracks__dots { display: none; }
+
+@media (max-width: 768px) {
+
+  /* Высота секции = масштабированная высота холста (без пустот).
+     --hero-scale (безразмерный) выставляет инлайн-скрипт в <head> */
+  .hero {
+    height: calc(1034px * var(--hero-scale, 1));
+  }
+
+  /* Десктопные слои прячем */
+  .hero__bg   { display: none; }
+  .hero__3d   { display: none; }
+  .hero::after { display: none; }
+  .menu__nav  { display: none; }
+
+  /* Холст 560 → пропорциональный масштаб по ширине вьюпорта.
+     transform: scale корректно масштабирует геометрию абсолютных
+     потомков (в отличие от zoom, который их смещает) */
+  .hero__stage {
+    width: 560px;
+    height: 1034px;
+    margin: 0;
+    transform: scale(var(--hero-scale, 1));
+    transform-origin: top left;
+  }
+
+  /* Мобильный фон внутри холста (масштабируется вместе со stage) */
+  .hero__bg-mobile {
+    display: block;
+    position: absolute;
+    left: 0; top: 0;
+    width: 560px; height: 1034px;
+    object-fit: cover;
+    z-index: 0;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* Мобильная 3D-композиция.
+     PNG экспортирован по тайтовому bbox (560×692) — ставим в натуральную
+     ширину без растяжения. Фрейм 692 при left:-65 → арт ≈ 0…560 на холсте. */
+  .hero__3d-mobile {
+    display: block;
+    position: absolute;
+    left: 0; top: 360px;   /* +15px (от кнопки) +30px (общий сдвиг вниз) */
+    width: 560px; height: auto;
+    z-index: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* --- Меню: лого + бургер --- */
+  .menu {
+    top: 20px; left: 20px;
+    width: 520px; height: 66px;
+    gap: 0;
+    padding: 0 8px;
+    border-radius: 15px;
+    justify-content: space-between;
+    z-index: 8;
+  }
+  .menu__burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex: none;
+    width: 52px; height: 52px;
+    border-radius: 10px;
+  }
+  .menu__burger span {
+    display: block;
+    width: 32px; height: 3px;
+    border-radius: 3px;
+    background: var(--grafite);
+  }
+
+  /* --- Заголовок: центр, 90px --- */
+  .hero__title {
+    top: 146px; left: 20px;   /* +30px вниз от меню */
+    width: 520px;
+    text-align: center;
+    white-space: normal;
+    font-size: 90px;
+    line-height: 0.95;
+    letter-spacing: -1.8px;
+    z-index: 3;
+  }
+  .hero__title-l2 { position: static; }
+
+  /* Бейдж «2.0»: абсолютно у конца «будущего» */
+  .hero__badge {
+    position: absolute;
+    left: 431px; top: 87px;
+    margin: 0;
+    transform: none;
+    padding: 8px 16px;
+    font-size: 24px;
+    line-height: 1.1;
+  }
+  .hero__badge-t { transform: translateY(2px); }
+
+  /* --- Подзаголовок: центр --- */
+  .hero__subtitle {
+    top: 336px; left: 20px;   /* +30px вниз */
+    width: 520px;
+    text-align: center;
+    font-size: 24px;
+    line-height: 1.2;
+  }
+
+  /* --- CTA: центр.
+     Центрируем через left:0/right:0 + margin:auto (БЕЗ transform):
+     entrance-анимация fade-up владеет transform — translateX(-50%)
+     был бы ею перебит и кнопку уводило бы вправо. --- */
+  .hero__cta {
+    top: 424px;               /* +30px вниз */
+    left: 0; right: 0;
+    margin-inline: auto;
+    width: 225px;
+    padding: 20px 32px;
+    border-radius: 20px;
+    /* Суперэллипс: Figma corner radius 20 + corner smoothing 60% (225×64) */
+    clip-path: path("M 193 0 c 11.2011 0 16.8016 0 21.0798 2.1799 a 20.0000 20.0000 0 0 1 8.7403 8.7403 c 2.1799 4.2782 2.1799 9.8788 2.1799 21.0798 L 225 32 c 0 11.2011 0 16.8016 -2.1799 21.0798 a 20.0000 20.0000 0 0 1 -8.7403 8.7403 c -4.2782 2.1799 -9.8788 2.1799 -21.0798 2.1799 L 32 64 c -11.2011 0 -16.8016 0 -21.0798 -2.1799 a 20.0000 20.0000 0 0 1 -8.7403 -8.7403 c -2.1799 -4.2782 -2.1799 -9.8788 -2.1799 -21.0798 L 0 32 c 0 -11.2011 0 -16.8016 2.1799 -21.0798 a 20.0000 20.0000 0 0 1 8.7403 -8.7403 c 4.2782 -2.1799 9.8788 -2.1799 21.0798 -2.1799 Z");
+    font-size: 24px;
+    z-index: 6;
+  }
+  .hero__cta span { transform: translateY(2px); }
+
+  /* --- Стеклянные плашки: абсолютно поверх 3D-композиции --- */
+  .hero__stats-row { display: contents; }
+
+  .glass-stat {
+    gap: 10px;
+    padding: 12px 16px;
+    border-radius: 15px;
+    z-index: 5;
+  }
+  .glass-stat__num {
+    font-size: 32px;
+    letter-spacing: 0;
+    transform: translateY(4px);
+  }
+  .glass-stat__label {
+    font-size: 16px;
+    line-height: 1;
+    transform: translateY(1px);
+  }
+
+  .glass-stat--courses { top: 567px; left: 47px; }   /* +15px (с 3D) +30px (общий сдвиг) */
+  .glass-stat--leaders { top: 623px; left: 290px; }
+  .glass-stat--tracks  { top: 679px; left: 119px; }
+}
+
+/* ============================================================
+   MOBILE 560 — ЭКРАН 2 «От выбора трека до сертификата»
+   Холст 560 (Figma 242:2030): заголовок + 3 карточки в столбик.
+   Карточки — цельные изображения (мобильные шрифты запечены).
+   Фон cream→white продолжает низ hero (#FFFEF8) — стык невидим.
    ============================================================ */
 @media (max-width: 768px) {
 
-  /* Контейнер: высота по контенту */
-  .hero {
-    height: auto;
-    min-height: 100svh;
-  }
-
-  /* Stage: сбрасываем фиксированный холст, переключаем в flex-колонку */
-  .hero__stage {
-    width: 100%;
-    height: auto;
-    min-height: 100svh;
-    margin: 0;
-    padding: 0 20px 52px;
-    display: flex;
-    flex-direction: column;
-    position: relative;
+  /* Секция = масштабированный холст. Высота = scale × высота холста */
+  .steps {
+    padding: 0;
+    height: calc(2262px * var(--hero-scale, 1));
     overflow: hidden;
   }
 
-  /* 3D: абсолютно справа, перекрывает заголовок сверху */
-  .hero__3d {
-    position: absolute;
-    top: -10px;
-    left: auto;
-    right: -24px;
-    width: 70%;
-    height: auto;
-    z-index: 2;
-  }
-
-  /* Nav: только лого, без ссылок */
-  .menu {
+  .steps .section {
     position: relative;
-    inset: auto;
-    width: 100%;
-    padding: 24px 0 0;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-  }
-  .menu__nav { display: none; }
-
-  /* Заголовок: потоковый, левая половина */
-  .hero__title {
-    position: relative;
-    top: auto; left: auto;
-    width: 54%;
-    white-space: normal;
-    font-size: 56px;
-    line-height: 1.05;
-    letter-spacing: -2px;
-    margin-top: 24px;
-    z-index: 3;
-  }
-
-  /* Подзаголовок */
-  .hero__subtitle {
-    position: relative;
-    top: auto; left: auto;
-    font-size: 16px;
-    line-height: 1.35;
-    margin-top: 20px;
+    width: 560px;
+    height: 2262px;
     max-width: none;
-    z-index: 3;
+    margin: 0;
+    padding: 0;
+    transform: scale(var(--hero-scale, 1));
+    transform-origin: top left;
+    /* Продолжение фона hero: кремовый верх → белый. Стартовый цвет
+       совпадает с низом hero-bg (#FFFEF8) → граница экранов не видна. */
+    background: linear-gradient(to bottom, #FFFEF8 0px, #FFFFFF 200px);
   }
 
-  /* CTA-кнопка */
-  .hero__cta {
+  /* Заголовок (живой текст, мобильный размер) */
+  .steps__title {
+    position: absolute;
+    top: 60px; left: 20px;
+    width: 520px;
+    margin: 0;
+    text-align: center;
+    font-size: 56px;       /* размер заголовков блоков на мобилке */
+    line-height: 1;        /* интерлиньяж 100% (2 строки = 112px → отступ до карточки 40px) */
+    letter-spacing: -0.5px;
+  }
+
+  /* Сетка раскрывается — карточки позиционируются по холсту */
+  .steps__grid { display: contents; }
+
+  .step-card {
+    position: absolute;
+    left: 20px;
+    width: 520px;
+    height: 650px;
+    /* углы PNG сделаны прозрачными (скрипт) — клип не нужен; так нет
+       серой кромки от overflow-клипа на масштабированном слое при скролле */
+    border-radius: 0;
+    overflow: visible;
+  }
+  .steps__grid .step-card:nth-child(1) { top: 212px; }
+  .steps__grid .step-card:nth-child(2) { top: 882px; }
+  .steps__grid .step-card:nth-child(3) { top: 1552px; }
+
+  /* Десктопные изображения прячем, показываем мобильную карточку.
+     Два кадра (default + активный) стопкой — кроссфейд по скроллу. */
+  .step-card__img,
+  .step-card__hover { display: none; }
+  .step-card__img-m {
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 520px;
+    height: 650px;
+    user-select: none;
+  }
+  /* Активный кадр (всплывающие плашки) — появляется при доскролле
+     до карточки (IntersectionObserver добавляет .is-visible).
+     Небольшая задержка: сначала «приезжает» карточка, затем кадр. */
+  .step-card__img-m--hover {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out 0.3s;
+  }
+  /* .is-active переключается обсёрвером: появляется при доскролле до карточки,
+     уходит когда карточка покидает экран (и возвращается при повторном показе) */
+  .step-card.is-active .step-card__img-m--hover { opacity: 1; }
+}
+
+/* ============================================================
+   MOBILE 560 — ЭКРАН 3 «Пять профессиональных треков»
+   Горизонтальный скролл равных карточек (Figma 264:1207 / 237:1181).
+   Карточки — белое стекло (white-70 + blur) поверх зелёного свечения
+   секции. Высота всех карточек = по самой длинной (карточка 1).
+   ============================================================ */
+@media (max-width: 768px) {
+
+  .tracks {
+    padding: 0;
+    height: calc(var(--tracks-h, 865px) * var(--hero-scale, 1));
+    overflow: hidden;
+  }
+  .tracks::before { display: none; }   /* десктопный glow-эллипс */
+  .tracks__3d     { display: none; }   /* десктопная 3D-«#» */
+
+  .tracks .section {
     position: relative;
-    top: auto; left: auto;
-    align-self: flex-start;
-    margin-top: 24px;
-    padding: 16px 28px;
-    font-size: 18px;
-    height: auto;
-    z-index: 3;
+    width: 560px;
+    height: var(--tracks-h, 865px);
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    transform: scale(var(--hero-scale, 1));
+    transform-origin: top left;
+    /* зелёное свечение секции: белый верх (бесшовно от steps) → лайм
+       у карточек → белый низ. Стекло карточек тинтится поверх. */
+    background:
+      radial-gradient(130% 60% at 50% 64%, rgba(157,241,157,0.55) 0%, rgba(157,241,157,0) 75%),
+      linear-gradient(to bottom, #ffffff 0%, #eefbe0 31%, #eefbe0 82%, #ffffff 100%);
   }
 
-  /* Стеклянные плашки: потоковые, в ряд внизу */
-  .glass-stat {
+  .tracks__title {
     position: relative;
-    top: auto; left: auto;
-    padding: 8px 14px;
-    gap: 10px;
-    border-radius: 14px;
+    z-index: 2;
+    text-align: center;
+    font-size: 56px;
+    line-height: 1;
+    letter-spacing: -0.5px;
+    margin: 0;
+    padding: 60px 20px 0;
   }
-  .glass-stat__num   { font-size: 36px; transform: translateY(4px); }
-  .glass-stat__label { font-size: 14px; transform: translateY(1px); }
 
-  /* Обёртка статов — три плашки в ряд */
-  .hero__stats-row {
+  /* Горизонтальный скролл с прилипанием */
+  .tracks__grid {
+    position: relative;
+    z-index: 2;
+    margin: 40px 0 0;
     display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-top: auto;
-    padding-top: 32px;
-    z-index: 3;
-    position: relative;
+    flex-direction: row;
+    align-items: stretch;          /* все карточки = высоте самой длинной */
+    gap: 20px;
+    padding: 0 20px;
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-snap-type: x proximity;  /* proximity, а не mandatory — иначе при подгрузке шрифтов контейнер перепрыгивает на 2-ю карточку */
+    scroll-padding-left: 20px;      /* снап оставляет 20px поля слева у карточки */
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
+  .tracks__grid::-webkit-scrollbar { display: none; }
+  .tracks__row { display: contents; }   /* развернуть 2 ряда в один поток из 5 карточек */
+
+  .track-card,
+  .track-card--wide {
+    flex: 0 0 480px;
+    width: 480px;
+    height: 505px;          /* стандарт = высота карточки 1 (контент 425 + зазор 80 над кнопкой) */
+    min-height: 0;
+    scroll-snap-align: start;
+    padding: 35px;
+    border-radius: 35px;
+    background: var(--white-70);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: inset 1px 1px 0 0 #fff;
+  }
+  /* на тач-устройствах hover не нужен */
+  .track-card:hover {
+    background: var(--white-70);
+    box-shadow: inset 1px 1px 0 0 #fff;
+  }
+  .track-card:hover .track-card__badge { background: transparent; }
+
+  /* карточка в центре экрана = десктопный hover-эффект (белый фон + glow),
+     переключается JS-обсёрвером при горизонтальном скролле */
+  .track-card.is-center {
+    background: var(--white);
+    box-shadow:
+      inset 1px 1px 0 0 var(--white),
+      -5px -5px 30px 0 rgba(255, 255, 255, 0.5),
+       5px  5px 30px 0 rgba(255, 255, 255, 0.5);
+  }
+  .track-card.is-center .track-card__badge { background: var(--sber-green-20); }
+
+  .track-card__head { gap: 30px; }
+  .track-card__title { font-size: 40px; line-height: 1; }
+
+  /* бейдж «N ч»: контур 2px, без inset-тени и сдвига */
+  .track-card__badge {
+    top: 0;
+    padding: 11px 18px 9px;   /* +1px вниз к тексту (оптика) */
+    box-shadow: none;
+    border: 2px solid var(--sber-green);
+    font-size: 20px;
+  }
+
+  /* оптическая центровка текста в бейджах, тегах и кнопках карточек:
+     SB Sans сидит высоко в лайн-боксе → обрезаем бокс до cap-height/baseline,
+     тогда align-items:center центрирует именно краску текста */
+  .track-card__badge,
+  .track-card__tag,
+  .track-card__btn {
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+
+  .track-card__desc { margin-top: 20px; font-size: 24px; line-height: 1.2; }
+
+  .track-card__tags { margin-top: 25px; gap: 10px; }
+  .track-card__tag { padding: 11px 13px 9px; border-radius: 8px; font-size: 16px; }
+
+  /* кнопка «Подробнее» прижата к низу (35px от границы за счёт padding) */
+  .track-card__btn {
+    align-self: flex-start;
+    margin-top: auto;
+    padding: 17px 24px 15px;   /* +1px вниз к тексту (оптика) */
+    font-size: 18px;
+  }
+
+  /* Пагинация: точки под карточками (20px от низа карточек) */
+  .tracks__dots {
+    display: flex;
+    position: absolute;
+    z-index: 3;
+    left: 0; right: 0;
+    top: 813px;            /* 268 (верх грида) + 505 (высота карточки) + 40 */
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+  }
+  .tracks__dot {
+    flex: none;
+    width: 8px; height: 8px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: var(--sber-green);
+    opacity: 0.5;
+    cursor: pointer;
+    transition: width 0.25s ease, height 0.25s ease, opacity 0.25s ease;
+  }
+  .tracks__dot.is-active {
+    width: 12px; height: 12px;
+    opacity: 1;
+  }
+}
+
+/* ============================================================
+   MOBILE — зелёные кнопки: без ховера, только нажатие.
+   ПРАВИЛО для всех кнопок мобильной и планшетной версий
+   (Figma SberStudent 3991:2423 / 4016:4142):
+   нажатие = заливка green-20 + контур 2px зелёный + зелёный текст.
+   ============================================================ */
+@media (max-width: 768px) {
+  /* отключаем hover-градиент (на тач он только мешает — «залипает») */
+  .hero__cta:hover::before,
+  .cta__btn:hover::before,
+  .track-card__btn:hover::before { opacity: 0; }
+
+  /* состояние нажатия */
+  .hero__cta:active,
+  .cta__btn:active,
+  .track-card__btn:active {
+    background: var(--sber-green-20);
+    box-shadow: inset 0 0 0 2px var(--sber-green);
+    color: var(--sber-green);
+  }
+  .track-card__btn:active::before { opacity: 0; }
 }

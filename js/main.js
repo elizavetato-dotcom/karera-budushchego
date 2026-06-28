@@ -4,7 +4,7 @@
 // Предекод hover-картинок карточек: при opacity:0 браузер откладывает декод,
 // из-за чего первое наведение «притормаживает». Декодируем заранее.
 window.addEventListener('load', function () {
-  document.querySelectorAll('.step-card__hover').forEach(function (img) {
+  document.querySelectorAll('.step-card__hover, .step-card__img-m--hover').forEach(function (img) {
     if (img.decode) {
       img.decode().catch(function () {});
     }
@@ -33,11 +33,25 @@ window.addEventListener('load', function () {
     els.forEach(function (el) { io.observe(el); });
   }
 
-  // Шаг 2: заголовок + три карточки с stagger
+  // Шаг 2: заголовок + три карточки с stagger (одноразовый въезд)
   observeGroup('.steps__title, .steps__grid .step-card');
 
-  // Треки: заголовок + пять карточек с stagger
-  observeGroup('.tracks__title, .tracks__grid .track-card');
+  // Карточки шагов: активное состояние (всплывающие плашки) на мобилке.
+  // Переключается, а не залипает: появляется при доскролле до карточки,
+  // уходит когда карточка покидает экран, возвращается при повторном показе.
+  var stepCards = document.querySelectorAll('.step-card');
+  if (stepCards.length) {
+    var stepActiveIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        entry.target.classList.toggle('is-active', entry.isIntersecting);
+      });
+    }, { threshold: 0.5 });
+    stepCards.forEach(function (el) { stepActiveIO.observe(el); });
+  }
+
+  // Треки: только заголовок (у карточек своя логика — активное состояние
+  // по центрированию в горизонтальном скролле, без entrance-анимации)
+  observeGroup('.tracks__title');
 
   // Программа: карточки въезжают с разных сторон
   var slideIO = new IntersectionObserver(function (entries) {
@@ -99,6 +113,53 @@ window.addEventListener('load', function () {
       openModal();
     });
   });
+}());
+
+// Горизонтальный скролл треков всегда стартует с первой карточки
+// (защита от восстановления позиции скролла браузером при перезагрузке)
+(function () {
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  var grid = document.querySelector('.tracks__grid');
+  if (!grid) return;
+  function reset() { grid.scrollLeft = 0; }
+  reset();
+  requestAnimationFrame(reset);
+  window.addEventListener('load', function () { reset(); setTimeout(reset, 250); });
+
+  // Пагинация: активная точка синхронизируется со скроллом, клик по точке
+  // плавно листает к нужной карточке.
+  var dots = document.querySelectorAll('.tracks__dots .tracks__dot');
+  var cards = grid.querySelectorAll('.track-card');
+  if (!dots.length || !cards.length) return;
+
+  function activeIndex() {
+    var mid = grid.scrollLeft + grid.clientWidth / 2;
+    var best = 0, bestDist = Infinity;
+    cards.forEach(function (c, i) {
+      var center = c.offsetLeft + c.offsetWidth / 2;
+      var d = Math.abs(center - mid);
+      if (d < bestDist) { bestDist = d; best = i; }
+    });
+    return best;
+  }
+  function syncDots() {
+    var idx = activeIndex();
+    dots.forEach(function (d, i) { d.classList.toggle('is-active', i === idx); });
+    // карточка по центру экрана получает «hover»-состояние (как на десктопе)
+    cards.forEach(function (c, i) { c.classList.toggle('is-center', i === idx); });
+  }
+  var ticking = false;
+  grid.addEventListener('scroll', function () {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () { syncDots(); ticking = false; });
+  }, { passive: true });
+  dots.forEach(function (d, i) {
+    d.addEventListener('click', function () {
+      grid.scrollTo({ left: cards[i].offsetLeft - 20, behavior: 'smooth' });
+    });
+  });
+  syncDots();
 }());
 
 // FAQ Accordion (defer — DOM готов, DOMContentLoaded не нужен)
